@@ -1,0 +1,82 @@
+[
+    {
+        "Name": "屯門咖哩屋 (Tuen Mun Curry House)",
+        "Location": "Tuen Mun (屯門), Tuen Mun neighbourhood",
+        "Description/Highlights": "本地獨立經營的印度風味咖哩屋，營業約20年。主打平價午市套餐（包含飯、薄餅、薯條、配菜）和即場拉茶；可加配印度手抓餅或薄餅，招牌包括咖哩雞、咖哩牛舌等。",
+        "Why Recommended": "午市份量大、物有所值，學生優惠及實惠價格吸引大量學生及街坊；餐點份量充足、口味貼地且有即拉奶茶的現場體驗。",
+        "Cost Estimate": "午市套餐約 HKD 50（學生穿校服平日 HKD 42）；整體屬平民價位",
+        "Unique Tips": "平日午市學生優惠（星期一至五，穿校服可享 HKD 42）；薄餅/手抓餅可加錢換配；點拉茶可要求少甜，店員會即場拉茶；份量大，如不夠吃可向店家要求加量（店內提到可免費加）。"
+    },
+    {
+        "Name": "龍門居長街宵夜小食 (Lung Mun Long Street Night Food Stalls)",
+        "Location": "龍門居長街，屯門 (Tuen Mun Long Street / Lung Mun Garden area)",
+        "Description/Highlights": "整條巷道的宵夜勝地，集合多間本地小食檔：手抓餅檔（多年老店，配料多變如出前一丁麻油麵、手撕雞、芝士）、泰式串燒檔（雞肉串、雞翼、沙嗲、金菇肥牛卷等）、豆花及甜品檔等。",
+        "Why Recommended": "氛圍地道、選擇多、價錢親民，是本地學生與街坊的宵夜熱點，口味多元且有懷舊感；多款特色配料（例如把出前一丁放入手抓餅）十分創意且受歡迎。",
+        "Cost Estimate": "平民消費，單件小食通常約 HKD 10–60（視項目而定），整體屬 Budget-friendly 宵夜價位",
+        "Unique Tips": "最佳時間為晚間/宵夜時段，人氣檔位可能需要排隊；手抓餅推薦配出前一丁麻油麵或拉絲芝士；必試泰式沙嗲與金菇肥牛卷（份量大、以兩竹籤串起）；小食檔多為現做，熱食風味佳。"
+    },
+    {
+        "Name": "明廚美食 (Ming Chu Mei Shi / Ming's Kitchen)",
+        "Location": "富多來 (Fu Duo Lai) shopping mall area, Tai Kok Tsui (大角咀)",
+        "Description/Highlights": "小店主打串燒（有鱔、烏頭、各類腸類、蔬菜、印度烤餅、手打魚肉湯等），由酒店廚房出身的老闆（明叔）一人經營，提供自家調配醬汁與多款風味串燒。",
+        "Why Recommended": "街坊價、食材處理專業（前酒店廚師）、每道菜都有老闆的烹調秘訣與用心，肉質軟嫩可選熟度，保有忠實老顧客群，具懷舊與社區感。",
+        "Cost Estimate": "串燒約 HKD 10–20 一串，整體屬平價街坊價",
+        "Unique Tips": "必試項目包括羊鞍、鱔、牛舌；可指定熟度（如六成熟）；店舖較細、氣氛親切，適合一個人慢慢吃或與街坊閒坐。"
+    },
+    {
+        "Name": "東興小食 (Tung Hing / Dong Hing Snacks)",
+        "Location": "大全街轉角 (corner of Daequan / 大全街), Tai Kok Tsui (大角咀)",
+        "Description/Highlights": "家庭式小食店，30多年歷史，主打即叫即炸的煎釀三寶與炸燒賣（炸燒賣賣 HKD1 一件），炸物保持內軟嫩、外不乾硬。",
+        "Why Recommended": "即炸新鮮、口感彈牙且具懷舊味道，是街坊深夜療癒小食，人氣高常常售罄，傳承家族配方與手工打魚肉工序。",
+        "Cost Estimate": "非常平價；炸燒賣 HKD1/件，整餐屬 Budget-friendly（約 HKD 20–80 視份量）",
+        "Unique Tips": "常常提早賣完（有時8–9時已售罄），建議早點來或碰運氣；必試煎釀三寶與炸燒賣，也可約多人一同分食盆菜版的大份煎釀三寶。"
+    },
+    {
+        "Name": "耀記餃子 (Yiu Kee Dumplings)",
+        "Location": "大角咀 (Tai Kok Tsui), 開店時間約 15:00 至 03:30（深夜仍營業）",
+        "Description/Highlights": "以手包餃子、煎餃、雲吞麵及粥品見稱；蠔仔粥以蠔多過米著稱，粥底加入乾魷魚增鮮，餃子即做即煎、外脆內甜像零食。",
+        "Why Recommended": "深夜宵夜好去處，湯底有煲湯感覺暖胃補身、餃子新鮮每天賣清，氣氛適合一大群朋友深夜聚會，深受學生與熟客支持。",
+        "Cost Estimate": "平價至中等（人均約 HKD 50–120，視點菜而定）",
+        "Unique Tips": "營業至凌晨約3:30，適合宵夜時間前往；必試蠔仔粥（蠔多過米）與煎餃／韭菜餃（常常早賣光，建議早點點或早來）。"
+    },
+    {
+        "Name": "Chicken Chicken (雞雞)",
+        "Location": "Jordan (佐敦), Kowloon",
+        "Description/Highlights": "Family-run Filipino restaurant offering home-style Filipino dishes — kare-kare (peanut-oxtail), crispy pata (fried pig knuckle), crispy pork belly, grilled skewers, tilapia in coconut milk, boodle fight communal platters, desserts like Halo-halo and Leche Flan; serves Filipino beers (e.g., Red Horse).",
+        "Why Recommended": "Authentic, homemade Filipino flavours; popular late‑night community spot; recognised by foreign media/Time Out; lively, welcoming atmosphere and unique communal eating experience (Boodle Fight).",
+        "Cost Estimate": "HKD 100-200 per person (budget–mid-range)",
+        "Unique Tips": "Must-try: Kare-Kare (peanut sauce oxtail), crispy pig knuckle with Mang Tomas sauce, Halo-halo and Leche Flan for dessert. Join a Boodle Fight to eat family‑style with hands; pairs well with Red Horse beer. Known for late-night service (used to open until ~4am)."
+    },
+    {
+        "Name": "Little Nepal / Nepalese fusion restaurant (小尼泊爾)",
+        "Location": "Jordan (佐敦), Kowloon (around Temple Street/Shanghai Street area)",
+        "Description/Highlights": "Nepalese fusion spot blending Nepal, Indian and other international elements — butter (creamy) curry chicken, various flavored naan (garlic/cheese/butter) baked in tandoor, momo (Nepalese dumplings), grilled meats (including pork shoulder), potato curry and salad offerings.",
+        "Why Recommended": "Well-liked by both Hongkongers and Nepalis for its approachable fusion flavours; long‑standing local favourite (owner Lalit, ~16 years); standout naans, juicy momo with a tangy dipping sauce and a rich, buttery curry chicken.",
+        "Cost Estimate": "HKD 80-180 per person (budget–mid-range)",
+        "Unique Tips": "Try the butter curry chicken and the different-flavoured naans; order momo for its chewy skin and juicy filling with the house dipping sauce. Expect a lively, hospitable owner who often greets guests; popular at dinner so evenings can be busier."
+    },
+    {
+        "Name": "喜樂雞蛋仔 (Hei Lok Egg Waffles)",
+        "Location": "慈雲山 (Tsz Wan Shan), Hong Kong",
+        "Description/Highlights": "Local snack stall selling Hong Kong-style egg waffles (多款口味，包括斑蘭味), 燒賣、魚蛋、撈麵等小食。店主Anna現場手打雞蛋製作蛋漿，蛋仔外脆內鬆軟。",
+        "Why Recommended": "多款特別口味（如斑蘭），賣相吸引、口感外脆內鬆，使用新鮮打蛋粉漿，具街坊情懷與人情味。",
+        "Cost Estimate": "HKD 20-50 per person (budget-friendly street snack)",
+        "Unique Tips": "必試斑蘭味（可叫雙拼），現場手打雞蛋製作，建議即買即食以保持外脆內軟；店主為區內老街坊，氣氛親切。"
+    },
+    {
+        "Name": "嘉豐茶餐廳",
+        "Location": "慈雲山 (Tsz Wan Shan), Hong Kong",
+        "Description/Highlights": "地道茶餐廳，開業約40年。招牌是咖喱豬扒及各式豬扒菜式，亦受附近學生歡迎。",
+        "Why Recommended": "豬扒手工處理（拍打鬆化），肉質軟熟無羶味；咖喱味道偏日式、微辣且香甜，適合學生及喜歡平價港式豬扒的人，為街坊飯堂級必食店。",
+        "Cost Estimate": "HKD 40-80 per person (budget to low-mid)",
+        "Unique Tips": "店舖下午/晚市不營業——通常下午5點便關門，建議午市或下午早點前往；豬扒為手工處理、選較瘦肉，味道偏甜微辣，適合小朋友和學生。"
+    },
+    {
+        "Name": "海福堂龜苓膏 (Hoi Fuk Tong Herbal Shop)",
+        "Location": "慈雲山 (Tsz Wan Shan) — near 嘉豐茶餐廳",
+        "Description/Highlights": "涼茶舖/龜苓膏店，營業超過20年，供應廿四味、龜苓膏及多款清熱降火草本飲品（如銀菊露、蛇舌草、夏枯草配銀菊露等）。",
+        "Why Recommended": "老店經驗豐富、配方講究，可按個人狀況調配涼茶；被街坊視為成長記憶與日常養生的一部分，對濕疹和去濕清熱有推介效果。",
+        "Cost Estimate": "HKD 20-50 per person (budget-friendly)",
+        "Unique Tips": "店主會透過觀察舌苔等判斷體質並推薦配方（可伸舌由阿姨看），熱門選擇包括銀菊露、蛇舌草、廿四味與龜苓膏；適合想降火、去濕或作為飯後清熱飲用。"
+    }
+]
