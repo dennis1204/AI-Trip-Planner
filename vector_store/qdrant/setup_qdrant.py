@@ -6,9 +6,12 @@ import uuid
 import pandas as pd
 import urllib.request
 from io import BytesIO
+import os
+from dotenv import load_dotenv
 
-API_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.2N5NtTzlma6s4laWrqmm_-NHJpkKP6sGEJU79RgBj74"
-URL="https://3e75098e-82de-4a84-97a2-c8d451f8b12f.us-west-1-0.aws.cloud.qdrant.io:6333"
+load_dotenv()
+API_KEY = os.getenv("QDRANT_API_KEY")
+URL = os.getenv("QDRANT_URL")
 # Qdrant client (local or cloud; replace for cloud)
 # client = QdrantClient(host="localhost", port=6333)  # Local Docker
 # For cloud: 

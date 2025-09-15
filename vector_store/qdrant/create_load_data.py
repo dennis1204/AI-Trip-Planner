@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 import uuid
 from io import BytesIO
 import urllib.request
@@ -18,10 +19,11 @@ from qdrant_client.models import (
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 import re
+load_dotenv()
 
 # Qdrant client (cloud setup)
-API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.2N5NtTzlma6s4laWrqmm_-NHJpkKP6sGEJU79RgBj74"
-URL = "https://3e75098e-82de-4a84-97a2-c8d451f8b12f.us-west-1-0.aws.cloud.qdrant.io:6333"
+API_KEY = os.getenv("QDRANT_API_KEY")
+URL = os.getenv("QDRANT_URL")
 COLLECTION_NAME = "hk_restaurants"
 
 client = QdrantClient(url=URL, api_key=API_KEY)

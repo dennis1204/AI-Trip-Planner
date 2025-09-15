@@ -4,13 +4,15 @@ from langchain_core.output_parsers import StrOutputParser
 from openai import AzureOpenAI
 import json
 import re
+from dotenv import load_dotenv
+import os
+load_dotenv()
 # llm = AzureChatOpenAI(azure_deployment="gpt-4o-mini", api_version="2023-05-15")
 
-endpoint = "https://denni-meyguxi0-eastus2.cognitiveservices.azure.com/"
+endpoint = os.getenv("AZURE_ENDPOINT")
+subscription_key = os.getenv("AZURE_API_KEY")
 model_name = "gpt-5-mini"
 deployment = "gpt-5-mini"
-
-subscription_key = "124M9tbO3IjR7exQpd20rPvibS9wjjeYm8tXvWGnPaP43kfqxjisJQQJ99BHACHYHv6XJ3w3AAAAACOGtj4f"
 api_version = "2024-12-01-preview"
 
 llm = AzureChatOpenAI(

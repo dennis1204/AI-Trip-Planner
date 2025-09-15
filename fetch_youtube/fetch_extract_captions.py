@@ -7,8 +7,8 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 # Env vars (replace hardcoded with these for security; set in terminal)
-endpoint = "https://denni-meyguxi0-eastus2.cognitiveservices.azure.com/"
-subscription_key = "124M9tbO3IjR7exQpd20rPvibS9wjjeYm8tXvWGnPaP43kfqxjisJQQJ99BHACHYHv6XJ3w3AAAAACOGtj4f"
+endpoint = os.getenv("AZURE_ENDPOINT")
+subscription_key = os.getenv("AZURE_API_KEY")
 api_version = "2024-12-01-preview"
 deployment = "gpt-5-mini"  # Your deployment name
 
