@@ -13,6 +13,8 @@ from qdrant_client.models import (
     PointStruct, SparseVector
 )
 from httpx import Timeout
+from dotenv import load_dotenv
+load_dotenv()
 
 # ---------------- Config ----------------
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
@@ -63,10 +65,10 @@ client = QdrantClient(  url=QDRANT_URL,
                         api_key=QDRANT_API_KEY,
                         timeout=180.0,  # ↑ give writes time
                         prefer_grpc=True,
-                        grpc_options=[
-                        ("grpc.max_send_message_length", 64 * 1024 * 1024),     # 64MB
-                        ("grpc.max_receive_message_length", 64 * 1024 * 1024),
-                    ],
+                       grpc_options={
+                            "grpc.max_send_message_length": 64 * 1024 * 1024,     # 64MB
+                            "grpc.max_receive_message_length": 64 * 1024 * 1024,
+                            },
                         )
 
 # Create collection once (if missing)
@@ -161,10 +163,12 @@ def chunked(seq, size):
 if points:
     for batch in chunked(points, 64):  # 64 is conservative; 128/256 also fine
         client.upsert(collection_name=COLLECTION, points=batch, wait=True)
-        print(f"Upserted {len(points)} points into '{COLLECTION}'.")
-    else:
-        print("No valid rows to upsert.")
+    print(f"Upserted {len(points)} points into '{COLLECTION}'.")
+else:
+    print("No valid rows to upsert.")
 
+
+client.close()
 # if points:
 #     client.upsert(collection_name=COLLECTION, points=points, wait=True)
 #     print(f"Upserted {len(points)} points into '{COLLECTION}'.")
