@@ -115,7 +115,7 @@ def hybrid_search(user_text: str, top_k: int = 10, prefetch_mul: int = 3, fusion
 
     # Build fusion model
     fusion_mode = models.Fusion.RRF if fusion.upper() == "RRF" else models.Fusion.DBSF
-    print("````````````", models.FusionQuery(fusion=fusion_mode))
+    # print("````````````", models.FusionQuery(fusion=fusion_mode))
     resp = client.query_points(
         collection_name=COLLECTION,
         prefetch=[
@@ -213,10 +213,10 @@ if __name__ == "__main__":
     ]
 
     for q in test_queries:
-        pts_f = hybrid_search_with_filter(q, district_exact="九龍城區")
-        pretty_print(pts_f, "Hybrid + filter(district='九龍城區') for ", q)
-        # pts_h = hybrid_search(q, top_k=3, fusion="RRF")
-        # pretty_print(pts_h, f"Hybrid results for: {q!r}")
+        # pts_f = hybrid_search_with_filter(q, district_exact="九龍城區")
+        # pretty_print(pts_f, "Hybrid + filter(district='九龍城區')")
+        pts_h = hybrid_search(q, top_k=3, fusion="RRF")
+        pretty_print(pts_h, f"Hybrid results for: {q!r}")
 
     # Example with a hard district filter:
     # pts_f = hybrid_search_with_filter("dim sum", district_exact="Kowloon City", top_k=10)

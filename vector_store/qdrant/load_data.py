@@ -68,15 +68,15 @@ def row_to_text(r: pd.Series) -> str:
         (str(r.get("菜系","")) + " ") * 2,
         str(r.get("所在區","")),
         str(r.get("地址","")),
-        str(r.get("餐廳亮點","")),
+        # str(r.get("餐廳亮點","")),
         str(r.get("推薦原因","")),
-        str(r.get("獨門貼士","")),
-        str(r.get("來源平台","")),
-        str(r.get("來源標題","")),
-        str(r.get("頻道／帳號","")),
-        str(r.get("消費預算—早餐（HKD/人）","")),
-        str(r.get("消費預算—午餐（HKD/人）","")),
-        str(r.get("消費預算—晚餐（HKD/人）","")),
+        # str(r.get("獨門貼士","")),
+        # str(r.get("來源平台","")),
+        # str(r.get("來源標題","")),
+        # str(r.get("頻道／帳號","")),
+        # str(r.get("消費預算—早餐（HKD/人）","")),
+        # str(r.get("消費預算—午餐（HKD/人）","")),
+        # str(r.get("消費預算—晚餐（HKD/人）","")),
     ]
     return " ".join(parts).strip()
 
@@ -102,6 +102,32 @@ if not client.collection_exists(COLLECTION):
     print(f"Created collection: {COLLECTION}")
 else:
     print(f"Using existing collection: {COLLECTION}")
+
+# ---------------- Payload Indexes ----------------
+# Define which payload fields you plan to filter/search on
+PAYLOAD_INDEXES = {
+    "district": "keyword",
+    "cuisine": "keyword",
+    "name": "keyword",
+    "parsed_cost_breakfast": "float",
+    "parsed_cost_lunch": "float",
+    "parsed_cost_dinner": "float",
+    # Add others if you plan to filter/sort on them
+}
+
+for field, schema in PAYLOAD_INDEXES.items():
+    try:
+        client.create_payload_index(
+            collection_name=COLLECTION,
+            field_name=field,
+            field_schema=schema,
+        )
+        print(f"[ok] Indexed '{field}' as {schema}")
+    except Exception as e:
+        if "already exists" in str(e).lower():
+            print(f"[ok] Index already exists: {field}")
+        else:
+            print(f"[warn] Index error for {field}: {e}")
 
 # Load Excel
 df = load_excel(EXCEL_SOURCE)
