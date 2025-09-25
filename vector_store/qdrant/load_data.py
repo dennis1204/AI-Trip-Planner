@@ -22,7 +22,7 @@ load_dotenv()
 # ---------------- Config ----------------
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 QDRANT_URL = os.getenv("QDRANT_URL")
-COLLECTION = "hk_restaurants_v2"
+COLLECTION = "hk_restaurants"
 EXCEL_SOURCE = "https://docs.google.com/spreadsheets/d/1U16glnBeVgMRG359bGxwnJnOlS_2oBBbpmvr5wUD6UU/export?format=xlsx"
 
 TFIDF_PATH = "tfidf.pkl"   # persist sparse model here
@@ -64,12 +64,12 @@ def stable_id(name: str, district: str) -> str:
 def row_to_text(r: pd.Series) -> str:
     # build text for sparse indexing (weighted fields)
     parts = [
-        (str(r.get("店名","")) + " ") * 3,
-        (str(r.get("菜系","")) + " ") * 2,
-        str(r.get("所在區","")),
+        str(r.get("店名","")),
+        str(r.get("菜系","")),
+        # str(r.get("所在區","")),
         str(r.get("地址","")),
-        # str(r.get("餐廳亮點","")),
-        str(r.get("推薦原因","")),
+        str(r.get("餐廳亮點","")),
+        # str(r.get("推薦原因","")),
         # str(r.get("獨門貼士","")),
         # str(r.get("來源平台","")),
         # str(r.get("來源標題","")),
@@ -198,7 +198,7 @@ for i, row in df.iterrows():
     points.append(PointStruct(
         id=stable_id(row["店名"], row["所在區"]),
         vector={
-            "dense": dense_vectors[i],
+            # "dense": dense_vectors[i],
             "text": SparseVector(indices=indices, values=values),
         },
         payload=payload,

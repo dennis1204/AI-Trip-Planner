@@ -9,13 +9,14 @@ from dotenv import load_dotenv
 
 from qdrant_client import QdrantClient, models
 from sentence_transformers import SentenceTransformer
-
+from district_aliases import EN_ALIASES, CN_ALIASES
+import re
 
 # ---------------- Config ----------------
 load_dotenv()
 QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
-COLLECTION = "hk_restaurants_v2"
+COLLECTION = "hk_restaurants"
 TFIDF_PATH = "tfidf.pkl"   # persisted by load_data.py
 
 # Named vectors used in your collection schema
@@ -70,14 +71,15 @@ def make_sparse_query(tfidf, q: str):
     return Xq.col.tolist(), Xq.data.tolist()
 
 
-def pretty_print(points, title: str, limit: int = 5):
+def pretty_print(points, title: str, limit: int = 3):
     print(f"\n{title}")
     for p in points[:limit]:
         pl = p.payload or {}
         name = pl.get("name")
         district = pl.get("district")
-        highlights = (pl.get("description_highlights") or "")[:60].replace("\n", " ")
-        print(f"- {name} | {district} | score={p.score:.4f} | {highlights}...")
+        cuisine = pl.get("cuisine")
+        highlights = (pl.get("description_highlights") or "")[:100].replace("\n", " ")
+        print(f"- {name} | {district} | {cuisine} | score={p.score:.4f} | {highlights}...")
 
 
 # ---------------- Search Routines ----------------
@@ -139,36 +141,56 @@ def hybrid_search(user_text: str, top_k: int = 10, prefetch_mul: int = 3, fusion
 
 
 # ---------------- Optional: metadata filter example ----------------
-def hybrid_search_with_filter(user_text: str, district_exact: str, top_k: int = 3):
-    tfidf = load_tfidf_or_none()
-    qtext = build_query_text(user_text, district=district_exact)
-    dense_vec = embedder.encode(qtext).tolist()
+def find_districts_in_query(q: str) -> list[str]:
+    ql = q.lower()
+    found = []
+    # English: word boundaries
+    for alias, targets in EN_ALIASES.items():
+        if re.search(rf"\b{re.escape(alias)}\b", ql):
+            found += targets
+    # Chinese: substring is usually fine
+    for alias, targets in CN_ALIASES.items():
+        if alias in q:
+            found += targets
+    # dedupe order
+    seen = set(); uniq = []
+    for d in found:
+        if d not in seen:
+            uniq.append(d); seen.add(d)
+    # print(TypeOf(uniq))
+    return uniq
 
-    flt = models.Filter(
-        must=[models.FieldCondition(
+def make_district_filter(districts):
+    if not districts:   # empty or None
+        return None        # no filtering at all
+    if len(districts) == 1:
+        return models.Filter(must=[
+            models.FieldCondition(
+                key="district",
+                match=models.MatchValue(value=districts[0])
+            )
+        ])
+    return models.Filter(should=[
+        models.FieldCondition(
             key="district",
-            match=models.MatchValue(
-                value=district_exact))]
-    )
+            match=models.MatchValue(value=d)
+        ) for d in districts
+    ])
 
-    # print("This is filter", flt)
 
-    # if tfidf is None:
-    #     # fallback: dense-only with filter
-    #     resp = client.query_points(
-    #         collection_name=COLLECTION,
-    #         query=dense_vec,
-    #         using="dense",
-    #         limit=top_k,
-    #         with_payload=True,
-    #         with_vectors=False,
-    #         query_filter=flt,
-    #     )
-    #     return resp.points
+def hybrid_search_with_filter(user_text: str, districts: str, top_k: int = 3):
+    tfidf = load_tfidf_or_none()
+    qtext = build_query_text(user_text, district=districts)
+    # dense_vec = embedder.encode(qtext).tolist()
 
+    # flt = models.Filter(
+    #     must=[models.FieldCondition(
+    #         key="district",
+    #         match=models.MatchValue(
+    #             value=district_exact))]
+    # )
+    filter = make_district_filter(districtList)
     idx, val = make_sparse_query(tfidf, qtext)
-
-    # print("+++++", models.FusionQuery(fusion=models.Fusion.RRF))
 
     resp = client.query_points(
         collection_name=COLLECTION,
@@ -177,14 +199,14 @@ def hybrid_search_with_filter(user_text: str, district_exact: str, top_k: int = 
                 query=models.SparseVector(indices=idx, values=val),
                 using="text",
                 limit=top_k * 3,
-                filter=flt,          # <-- FIXED (was query_filter)
+                filter=filter,          # <-- FIXED (was query_filter)
             ),
-            models.Prefetch(
-                query=dense_vec,
-                using="dense",
-                limit=top_k * 3,
-                filter=flt,          # <-- FIXED
-            ),
+            # models.Prefetch(
+            #     query=dense_vec,
+            #     using="dense",
+            #     limit=top_k * 3,
+            #     filter=filter,          # <-- FIXED
+            # ),
         ],
         query=models.FusionQuery(fusion=models.Fusion.RRF),
         limit=top_k,
@@ -206,17 +228,23 @@ if __name__ == "__main__":
         sys.exit(1)
 
     test_queries = [
-        "印度菜",
-        "budget seafood Sham Shui Po dinner",
-        "affordable dim sum Kowloon",
-        "cozy cafe Central",
+        "屯門印度菜",
+        "深水埗海鮮晚餐",
+        "九龍點心",
+        "中環舒適的咖啡館",
+        "南區港式西餐",
+        # "budget seafood Sham Shui Po dinner",
+        # "affordable dim sum Kowloon",
+        # "cozy cafe Central",
     ]
 
     for q in test_queries:
-        # pts_f = hybrid_search_with_filter(q, district_exact="九龍城區")
-        # pretty_print(pts_f, "Hybrid + filter(district='九龍城區')")
-        pts_h = hybrid_search(q, top_k=3, fusion="RRF")
-        pretty_print(pts_h, f"Hybrid results for: {q!r}")
+        districtList = find_districts_in_query(q)
+        print(f"\nQuery: {q!r} | districts={districtList!r}")
+        pts_f = hybrid_search_with_filter(q, districts=districtList)
+        pretty_print(pts_f, "Hybrid + filter(district)")
+        # pts_h = hybrid_search(q, top_k=3, fusion="RRF")
+        # pretty_print(pts_h, f"Hybrid results for: {q!r}")
 
     # Example with a hard district filter:
     # pts_f = hybrid_search_with_filter("dim sum", district_exact="Kowloon City", top_k=10)
