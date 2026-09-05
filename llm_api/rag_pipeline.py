@@ -3,8 +3,9 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from langchain_community.vectorstores import FAISS
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
-embeddings = AzureOpenAIEmbeddings(azure_deployment="text-embedding-3-small", api_version="2023-05-15")
+embeddings = GoogleGenerativeAIEmbeddings(azure_deployment="text-embedding-3-small", api_version="2023-05-15")
 vector_store = FAISS.load_local("hk_tourism_index", embeddings, allow_dangerous_deserialization=True)
 retriever = vector_store.as_retriever(search_kwargs={"k": 5})
 
